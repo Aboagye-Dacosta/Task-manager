@@ -1,0 +1,27 @@
+.task__input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 71%;
+
+  margin: 0 auto;
+  border: 1px solid $color-dark-grey;
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
+
+  &__icon {
+    font-size: 1.5rem;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &__input {
+    width: 97%;
+    border: none;
+
+    &__not-visible {
+      display: none;
+    }
+  }
+}

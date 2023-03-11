@@ -1,0 +1,20 @@
+.content {
+  height: 95vh;
+  background-color: $color-white;
+  width: 100%;
+
+  background-image: linear-gradient(
+    to right bottom,
+    rgba($color-white, 0.1),
+    rgba($color-white, 0.2)
+  );
+  position: relative;
+  backdrop-filter: blur(0.3rem);
+
+  &__input-field {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

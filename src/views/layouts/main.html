@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./../main.css" />
+  </head>
+  <body>
+    <!--dash board layout-->
+    <div class="container home">
+      <div class="row">
+        <div class="col-2">
+          <div class="side-bar">
+            <div class="side-bar__header">
+              <a
+                href="/tasks/profile"
+                class="side-bar__header__image link utility-display-block utility-height-100"
+              >
+                <img src="./../img/undraw_Female_avatar_efig.png" alt="" />
+              </a>
+
+              <div class="side-bar__header__title">{{user.username}}</div>
+              <span class="side-bar__header__subtitle">{{user.email}}</span>
+            </div>
+            <div class="divider"></div>
+            <div class="side-bar__content">
+              <ul class="list">
+                <li class="list__item">
+                  <a href="/tasks" class="link utility-color-black">My Day</a>
+                </li>
+                <li class="list__item">
+                  <a href="/tasks/important" class="link utility-color-black"
+                    >Important</a
+                  >
+                </li>
+                <li class="list__item">
+                  <a href="/tasks/planned" class="link utility-color-black"
+                    >Planned</a
+                  >
+                </li>
+                <li class="list__item">
+                  <a
+                    href="/tasks/assigned-to-me"
+                    class="link utility-color-black"
+                    >Assigned To Me</a
+                  >
+                </li>
+                <li class="list__item">
+                  <a href="/tasks/all" class="link utility-color-black">Task</a>
+                </li>
+              </ul>
+            </div>
+            <div class="side-bar__footer">
+              <a href="/auth/logout" class="link utility-color-black">Logout</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-10">
+          <div class="content">
+            {{{body}}} {{#if showInput}}
+            <div class="container content__input-field">
+              <div class="row">
+                <div class="col-12">{{>input_field path=path}}</div>
+              </div>
+            </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./../script/task_script.js"></script>
+  </body>
+</html>

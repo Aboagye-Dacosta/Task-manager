@@ -1,0 +1,54 @@
+<div class="container profile">
+  <div class="row">
+    <div class="col-9">
+      <form class="row profile__form">
+        <div class="col-4">
+          <div class="profile__image">
+            <img src="./../img/undraw_Female_avatar_efig.png" alt="" />
+          </div>
+        </div>
+        <div class="col-8 profile__form-fields">
+          <div class="row">
+            <div class="col-12">
+              <div class="form__group">
+                <input
+                  type="text"
+                  class="form__control profile__form-input"
+                  id="userIdentifier"
+                  name="userIdentifier"
+                  placeholder="Choose a username"
+                  value="{{user.username}}"
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form__group">
+                <input
+                  type="email"
+                  class="form__control profile__form-input"
+                  id="email"
+                  name="username"
+                  placeholder="Email"
+                  value="{{user.email}}"
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="col-4 utility-margin-bottom-sm">Additional info</div>
+            </div>
+            <div class="col-12">
+              <div class="profile__tasks">23 tasks completed</div>
+            </div>
+            <div class="col-12">
+              <div class="profile__tasks">11 tasks still pending</div>
+            </div>
+
+            <div class="col-12 profile__form-button">
+              <button type="submit" class="btn btn--secondary">save</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

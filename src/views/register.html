@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <form action="/auth/register" method="post" class="form">
+        <div
+          class="col-12 utility-text-center utility-padding-small utility-color-primary"
+        >
+          Register now to get access to all the features of our website. Save
+          all your tasks and access them from anywhere.
+        </div>
+        <div class="col-12">
+          <div class="form__group">
+            <label class="form__label" for="username">Your username</label>
+            <input
+              type="text"
+              class="form__control"
+              id="userIdentifier"
+              name="userIdentifier"
+              placeholder="Choose a username"
+            />
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form__group">
+            <label class="form__label" for="email">Email</label>
+            <input
+              type="email"
+              class="form__control"
+              id="email"
+              name="username"
+              placeholder="Email"
+            />
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form__group">
+            <label class="form__label" for="password">Password</label>
+            <input
+              type="password"
+              class="form__control"
+              id="password"
+              name="password"
+              placeholder="Password"
+            />
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form__group">
+            <label class="form__label" for="confirmPassword"
+              >Confirm password</label
+            >
+            <input
+              type="password"
+              class="form__control"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm password"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <button
+              type="submit"
+              class="btn btn--primary"
+              name="submit__button"
+              value="button"
+            >
+              Register
+            </button>
+          </div>
+          <div class="col-6">
+            <a
+              href="/auth/login"
+              class="btn btn--secondary link utility-text-center"
+              >Login</a
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

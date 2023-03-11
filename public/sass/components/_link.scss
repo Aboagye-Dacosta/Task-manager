@@ -1,0 +1,17 @@
+.link {
+  color: $color-primary;
+  text-decoration: none;
+  display: inline-block;
+
+  &--primary{
+    font-size: $font-size-x-small;
+  }
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  &:focus {
+    color: $color-primary;
+  }
+}

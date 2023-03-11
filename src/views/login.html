@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <form action="/auth/login" target="_self" method="POST" class="form">
+        <div class="col-12">
+          <div class="form__group">
+            <label for="email" class="form__label">Your Email</label>
+            <input
+              type="text"
+              class="form__control"
+              name="username"
+              id="email"
+            />
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form__group">
+            <label for="password" class="form__label">Your Password</label>
+            <input
+              type="password"
+              class="form__control"
+              name="password"
+              id="password"
+            />
+          </div>
+        </div>
+        <div class="col-12">
+          <button
+            type="submit"
+            class="btn btn--primary"
+            name="submit_button"
+            value="send"
+          >
+            Login
+          </button>
+        </div>
+        <div class="col-12 utility-text-center">
+          <a
+            href="/auth/register"
+            class="link link--primary utility-text-center"
+            >Don't have an account? Register</a
+          >
+        </div>
+        <div class="col-12 utility-text-center">
+          <span>Or</span>
+        </div>
+
+        <div class="col-12 utility-text-center">
+          <a href="/auth/google" class="link btn btn--google"
+            >Login with Google</a
+          >
+        </div>
+
+        <div class="col-12 utility-text-center utility-margin-top-sm">
+          <a href="/auth/facebook" class="link btn btn--facebook"
+            >Login with Facebook</a
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

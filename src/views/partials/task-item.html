@@ -1,0 +1,54 @@
+<!--Task item-->
+<div class="container">
+  <div class="row">
+    <div class="col-10">
+      <div class="task__item" data-id="{{task.task_id}}">
+        <div class="task__item__check-completed">
+          <input
+            type="checkbox"
+            name="check-completed"
+            data-itemId="{{task.task_id}}"
+            {{task.completed}}
+            id="taskCompleted"
+            class="task__item__check-completed__checkbox"
+          />
+          <img
+            src="./../img/svgs/circle.svg"
+            alt=""
+            srcset=""
+            class="task__item__icon-circle"
+          />
+          <img
+            src="./../img/svgs/check.svg"
+            alt=""
+            srcset=""
+            class="task__item__icon-check"
+          />
+        </div>
+        <div class="task__item__text">{{task.task_description}}</div>
+        <div class="task__item__check-important">
+          <input
+            type="checkbox"
+            name=""
+            id="taskImportant"
+            data-itemId="{{task.id}}"
+            {{task.important}}
+            class="task__item__check-important__checkbox"
+          />
+          <img
+            src="./../img/svgs/star_outline.svg"
+            alt=""
+            srcset=""
+            class="task__item__icon-star-outline"
+          />
+          <img
+            src="./../img/svgs/star_rate.svg"
+            alt=""
+            srcset=""
+            class="task__item__icon-star-rate"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

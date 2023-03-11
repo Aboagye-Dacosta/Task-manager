@@ -1,0 +1,22 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -ms-overflow-style: scrollbar;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: $font-size-medium;
+  line-height: $line-height-default;
+  color: #333;
+  min-height: 100vh;
+}

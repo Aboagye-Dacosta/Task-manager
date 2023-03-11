@@ -1,0 +1,77 @@
+.utility-margin-top-sm {
+  margin-top: 1rem;
+}
+
+.utility-margin-bottom-sm {
+  margin-bottom: 1rem;
+}
+
+//text alignments
+.utility-text-center {
+  text-align: center;
+}
+
+.utility-text-left {
+  text-align: left;
+}
+
+.utility-text-right {
+  text-align: right;
+}
+
+//widths
+
+.utility-width-100 {
+  width: 100% !important;
+}
+
+.utility-width-50 {
+  width: 50%;
+}
+
+//height
+.utility-height-100 {
+  height: 100% !important;
+}
+
+//display
+.utility-display-none {
+  display: none;
+}
+
+.utility-display-block {
+  display: block !important;
+}
+
+//padding
+.utility-padding-x-small {
+  padding: 0.5rem;
+}
+.utility-padding-small {
+  padding: 1rem;
+}
+
+//color
+.utility-color-primary {
+  color: $color-primary;
+}
+
+.utility-color-black {
+  color: $color-dark-grey !important;
+}
+
+//position
+.utility-position-relative {
+  position: relative;
+}
+
+//border
+.utility-border-none {
+  border: none !important;
+}
+
+//border-radius
+
+.utility-border-radius-small {
+  border-radius: 0.5rem;
+}

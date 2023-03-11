@@ -1,0 +1,38 @@
+.btn {
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  font-size: $font-size-medium;
+  font-weight: 700;
+  width: 100%;
+
+  &--primary {
+    background-color: #333;
+    color: #fff;
+  }
+
+  &--secondary {
+    background-color: #fff;
+    color: $color-dark-grey;
+    border: 1px solid $color-dark-grey;
+  }
+
+  &--google {
+    background-color: #fff;
+    color: $color-dark-grey;
+    border: 1px solid $color-dark-grey;
+
+    &:hover {
+      color: $color-dark-grey;
+    }
+  }
+
+  &--facebook {
+    background-color: $color-secondary-light;
+    color: $color-white;
+    border: 1px solid $color-dark-grey;
+
+    &:hover {
+      color: $color-white;
+    }
+  }
+}

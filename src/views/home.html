@@ -1,0 +1,37 @@
+<div class="container home-my-day utility-position-relative">
+  <div class="home-my-day__bg">
+    <img src="./../img/svgs/undraw_to_do_list_re_9nt7.svg" alt="" />
+  </div>
+  <div class="home-my-day__content">
+    <div class="not-completed">
+      {{#each tasks as |task|}}{{#if task.notDone}} {{>task_item
+      task=task}}{{/if}}{{/each}}
+    </div>
+    <div class="completed">
+      {{#if task.done}}
+      <div class="completed__slider">
+        <div class="container">
+          <div class="row">
+            <div class="col-10">
+              <button
+                class="btn--secondary utility-border-radius-small utility-padding-x-small"
+              >
+                Completed
+                <img
+                  src="./../img/svgs/keyboard_arrow_down.svg"
+                  alt=""
+                  class="icon"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/if}}
+      <div class="completed__content">
+        {{#each tasks as |task|}} {{#if task.done}} {{>task_item
+        task=task}}{{/if}}{{/each}}
+      </div>
+    </div>
+  </div>
+</div>
