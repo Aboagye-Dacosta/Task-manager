@@ -1,0 +1,25 @@
+//media query mixin
+
+@mixin media($breakpoint) {
+  @if $breakpoint == mobile {
+    @media only screen and (max-width: $breakpoint-mobile) {
+      @content;
+    }
+  } @else if $breakpoint == tablet {
+    @media only screen and (min-width: $breakpoint-mobile) and (max-width: $breakpoint-tablet) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    @media only screen and (min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop) {
+      @content;
+    }
+  } @else if $breakpoint == large-desktop {
+    @media only screen and (min-width: $breakpoint-desktop) and (max-width: $breakpoint-large-desktop) {
+      @content;
+    }
+  } @else if $breakpoint == desktop-large {
+    @media only screen and (min-width: $breakpoint-desktop) {
+      @content;
+    }
+  }
+}

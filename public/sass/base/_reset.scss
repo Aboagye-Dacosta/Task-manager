@@ -20,3 +20,33 @@ body {
   color: #333;
   min-height: 100vh;
 }
+
+@include media(mobile) {
+  html {
+    font-size: 40%;
+  }
+
+  body {
+    font-size: $font-size-small;
+  }
+}
+
+@include media(tablet) {
+  html {
+    font-size: 45%;
+  }
+
+  body {
+    font-size: $font-size-medium;
+  }
+}
+
+@include media(desktop) {
+  html {
+    font-size: 50%;
+  }
+
+  body {
+    font-size: $font-size-medium;
+  }
+}

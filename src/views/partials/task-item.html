@@ -8,7 +8,7 @@
             type="checkbox"
             name="check-completed"
             data-itemId="{{task.task_id}}"
-            {{task.completed}}
+            {{task.checked}}
             id="taskCompleted"
             class="task__item__check-completed__checkbox"
           />
@@ -31,8 +31,8 @@
             type="checkbox"
             name=""
             id="taskImportant"
-            data-itemId="{{task.id}}"
-            {{task.important}}
+            data-itemId="{{task.task_id}}"
+            {{task.checkedImportant}}
             class="task__item__check-important__checkbox"
           />
           <img
@@ -52,3 +52,8 @@
     </div>
   </div>
 </div>
+
+<!-- <script>
+  const checkbox = document.querySelector("#taskCompleted");
+  console.log(checkbox);
+</script> -->

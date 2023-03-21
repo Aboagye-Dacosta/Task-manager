@@ -21,6 +21,7 @@ function createTables() {
         user_id INTEGER NOT NULL UNIQUE,
         user_name Text not null,
         user_email TEXT NOT NULL UNIQUE,
+        user_profile_image Text ,
         user_hash_password Blob NOT NULL,
         user_salt Blob NOT NULL,
         user_created_at TEXT NOT NULL,

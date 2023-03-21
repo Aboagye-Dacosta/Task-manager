@@ -1,8 +1,25 @@
 const passport = require("passport");
 const crypto = require("crypto");
-const { getUserByEmail, saveUser } = require("../model/users.model");
+const {
+  getUserByEmail,
+  saveUser,
+  updateUser,
+  getUserByUserId,
+} = require("../model/users.model");
 const createdRequired = require("../services/createRequiredFields.services");
 
+function setSessionBody(user) {
+  return {
+    id: user.user_id,
+    username: user.user_name,
+    email: user.user_email,
+    noProfile: user.user_profile_image ? false : true,
+    hasProfile: user.user_profile_image ? true : false,
+    profile: user.user_profile_image,
+  };
+}
+
+//TODO save user to db
 async function httpSaveUser(req, res, next) {
   console.log(req.body);
 
@@ -36,7 +53,7 @@ async function httpSaveUser(req, res, next) {
   saveUser([id, userIdentifier, email, key, salt, createdAt, updatedAt], next);
 }
 
-//reading user
+//TODO reading user
 async function httpReadUser(email, password, callback) {
   if (!email) return callback("email cannot be empty");
   if (!password) return callback("password cannot be empty");
@@ -50,21 +67,43 @@ async function httpReadUser(email, password, callback) {
     console.log("password does not match");
     return callback("password incorrect");
   }
+  callback(null, setSessionBody(user));
+}
 
-  //  user_id INTEGER NOT NULL UNIQUE,
-  //       user_name Text not null,
-  //       user_email TEXT NOT NULL UNIQUE,
-  console.log(user);
-
-  callback(null, {
-    id: user.user_id,
-    username: user.user_name,
-    email: user.user_email,
+//TODO update user details
+async function httpUpdateUser(req, res, next, fields, file) {
+  console.log(fields, file);
+  if (Object.keys(file).length === 0) {
+    file = null;
+  } else {
+    file = file.photo.newFilename;
+  }
+  const { updatedAt } = createdRequired();
+  try {
+    await updateUser(
+      req.user,
+      {
+        username: fields.userIdentifier,
+        email: fields.username,
+      },
+      file,
+      updatedAt
+    );
+  } catch (error) {
+    next(err);
+  }
+  const user = await getUserByUserId(req.user.id);
+  req.session.passport.user = setSessionBody(user);
+  req.session.save((err) => {
+    if (err) {
+      console.log(err);
+    }
   });
+  return next();
 }
 
 module.exports = {
   httpSaveUser,
   httpReadUser,
-  createdRequired,
+  httpUpdateUser,
 };

@@ -1,10 +1,20 @@
 <div class="container profile">
   <div class="row">
     <div class="col-9">
-      <form class="row profile__form">
+      <form
+        class="row profile__form"
+        method="post"
+        action="/auth/user/update"
+        enctype="multipart/form-data"
+      >
         <div class="col-4">
           <div class="profile__image">
+            {{#if user.noProfile}}
             <img src="./../img/undraw_Female_avatar_efig.png" alt="" />
+
+            {{/if}} {{#if user.hasProfile}}
+            <img src="https://localhost:8000/images/{{user.profile}}" alt="" />
+            {{/if}}
           </div>
         </div>
         <div class="col-8 profile__form-fields">
@@ -37,12 +47,26 @@
               <div class="col-4 utility-margin-bottom-sm">Additional info</div>
             </div>
             <div class="col-12">
-              <div class="profile__tasks">23 tasks completed</div>
+              <div class="profile__tasks">
+                {{count.totalCompleted}} tasks completed
+              </div>
             </div>
             <div class="col-12">
-              <div class="profile__tasks">11 tasks still pending</div>
+              <div class="profile__tasks">
+                {{count.pending}} tasks still pending
+              </div>
             </div>
-
+            <div class="col-12">
+              <div class="form__group">
+                <input
+                  type="file"
+                  class="form__control profile__form-input"
+                  id="file"
+                  name="photo"
+                  accept="image/*"
+                />
+              </div>
+            </div>
             <div class="col-12 profile__form-button">
               <button type="submit" class="btn btn--secondary">save</button>
             </div>
@@ -52,3 +76,22 @@
     </div>
   </div>
 </div>
+
+<script>
+  const imageUpload = document.querySelector(".profile__image__upload");
+
+  imageUpload.addEventListener("change", (e) => {
+    console.log(e.target.value);
+    const files = e.target.value;
+    const responseFormData = new FormData();
+    const id = e.target.dataset.id;
+
+    document.querySelector(".profile__image-img").src = e.target.value;
+
+    for (let i = 0; i < files.length; i++) {
+      responseFormData.append("data", files[i]);
+    }
+  });
+</script>
+
+<!-- fetch(`https://localhost:8000/tasks/profile/${id}`); -->

@@ -28,3 +28,17 @@ $font-size-large: 2rem;
 //line heights
 $line-height-small: 1.2;
 $line-height-default: 1.5;
+
+//break points
+// Mobile – 360 x 640; 375 x 667; 360 x 720.
+// Tablet – 768 x 1024.
+// iPhone – 375 x 812.
+// Laptop – 1366 x 768.
+// Desktop or high-resolution laptop – 1920 x 1080.
+
+$breakpoint-mobile: 37.5em;
+$breakpoint-tablet: 48em;
+$breakpoint-desktop: 56.25em;
+$breakpoint-large-desktop: 75em;
+
+

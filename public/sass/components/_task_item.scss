@@ -8,6 +8,7 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   border-radius: 5px;
   margin-bottom: 1rem;
+
   background: linear-gradient(
     to left bottom,
     rgba($color-grey-light, 0.5),
@@ -61,6 +62,11 @@
 
   //task__item__check-completed__checkbox task__item__icon-check
   &__check-completed__checkbox:checked ~ &__icon-check {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__check-completed__checkbox:hover ~ &__icon-check {
     visibility: visible;
     opacity: 1;
   }

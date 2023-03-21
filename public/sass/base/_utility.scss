@@ -26,7 +26,11 @@
 }
 
 .utility-width-50 {
-  width: 50%;
+  width: 50% !important;
+}
+
+.utility-width-min {
+  max-width: max-content;
 }
 
 //height

@@ -17,4 +17,12 @@
     left: 50%;
     transform: translateX(-50%);
   }
+
+  &__title {
+    position: absolute;
+    top: 0.5rem;
+    left: 4rem;
+    color: $color-dark-grey;
+    z-index: 100;
+  }
 }

@@ -3,12 +3,12 @@
     <img src="./../img/svgs/undraw_to_do_list_re_9nt7.svg" alt="" />
   </div>
   <div class="home-my-day__content">
-    <div class="not-completed">
+    <div class="home-my-day__content__not-completed">
       {{#each tasks as |task|}}{{#if task.notDone}} {{>task_item
       task=task}}{{/if}}{{/each}}
     </div>
     <div class="completed">
-      {{#if task.done}}
+      {{#if show}}
       <div class="completed__slider">
         <div class="container">
           <div class="row">
@@ -28,10 +28,12 @@
         </div>
       </div>
       {{/if}}
-      <div class="completed__content">
+      <div class="home-my-day__content__completed">
         {{#each tasks as |task|}} {{#if task.done}} {{>task_item
         task=task}}{{/if}}{{/each}}
       </div>
     </div>
   </div>
 </div>
+
+

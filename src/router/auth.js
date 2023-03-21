@@ -1,7 +1,14 @@
 const express = require("express");
+const path = require("path");
 const passport = require("passport");
-const { httpSaveUser, httpReadUser } = require("./register.controller");
+const formidable = require("formidable");
+const {
+  httpSaveUser,
+  httpReadUser,
+  httpUpdateUser,
+} = require("./register.controller");
 const LocalStrategy = require("passport-local");
+
 
 const authRouter = express.Router();
 
@@ -10,6 +17,36 @@ passport.use(
     console.log(username, password);
     httpReadUser(username, password, done);
   })
+);
+
+authRouter.post(
+  "/user/update",
+  (req, res, next) => {
+    const form = formidable({
+      multiples: true,
+      uploadDir: path.join(__dirname, "..", "..", "public", "uploads"),
+      keepExtensions: true,
+      filename: (name, ext, part, form) => {
+        return `${req.user.id}#${Date.now()}${ext}`;
+      },
+
+      filter: ({ name, originalFilename, mimetype }) => {
+        return mimetype === "image/jpeg" || mimetype === "image/png";
+      },
+    });
+
+    form.parse(req, (err, fields, files) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      httpUpdateUser(req, res, next, fields, files);
+    });
+  },
+  (req, res) => {
+  
+    res.redirect("/tasks/profile");
+  }
 );
 
 authRouter.get("/login", (req, res) => {

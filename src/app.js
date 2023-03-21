@@ -70,4 +70,11 @@ app.get("/", nocache, (req, res) => {
   });
 });
 
+app.get("/images/:profile", (req, res) => {
+  console.log("logging from user accessing image", req.user.profile);
+  res.sendFile(
+    path.join(__dirname, "..", "public", "uploads", `${req.user.profile}`)
+  );
+});
+
 module.exports = app;

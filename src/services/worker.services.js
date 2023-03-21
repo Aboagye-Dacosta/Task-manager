@@ -26,6 +26,8 @@ const { data, action } = workerData;
 
 // getDataCreatedToday(data);
 
+let countCompleted = 0;
+
 if (!data) return parentPort.postMessage([]);
 if (data.length === 0) return parentPort.postMessage([]);
 
@@ -37,7 +39,7 @@ function filterCurrent() {
     );
   });
 
-  parentPort.postMessage(results);
+  return results;
 }
 
 function filterImportant() {
@@ -45,19 +47,66 @@ function filterImportant() {
   const result2 = data.filter(
     (item) => item.task_important === 1 && item.task_type !== "important"
   );
-  parentPort.postMessage([result1, result2].flat(1));
+  const results = [result1, result2].flat(1);
+
+  return results;
 }
 
 function filterPlanned() {
   const results = data.filter((item) => item.task_type === "planned");
-  parentPort.postMessage(results);
+  return results;
 }
 
+function filterAssignedToMe() {
+  const results = data.filter((item) => item.task_type === "assigned-to-me");
+  return results;
+}
+
+function countComplete(data) {
+  return data.reduce((acc, item) => {
+    if (item.task_completed === 1) acc++;
+    return acc;
+  }, 0);
+}
+
+countListByType = {
+  planned: filterPlanned().length,
+  important: filterImportant().length,
+  current: filterCurrent().length,
+  assignedToMe: filterAssignedToMe().length,
+  all: data.length,
+  completed: countCompleted,
+  totalCompleted: countComplete(data),
+  pending: data.length - countComplete(data),
+};
+
 // updateFields
+let results = [];
 
-if (action === "filterCurrent") filterCurrent();
-if (action === "filterImportant") filterImportant();
-if (action === "filterPlanned") filterPlanned();
-if (action === "filterAll") parentPort.postMessage(data);
+if (action === "filterCurrent") {
+  results = filterCurrent();
+  countListByType.completed = countComplete(results);
+}
+if (action === "filterImportant") {
+  results = filterImportant();
+  countListByType.completed = countComplete(results);
+}
+if (action === "filterPlanned") {
+  results = filterPlanned();
+  countListByType.completed = countComplete(results);
+}
+if (action === "filterAll") {
+  results = data;
+  countListByType.completed = countComplete(results);
+}
 
+if (action === "filterAssigned-to-me") {
+  results = filterAssignedToMe();
+  countListByType.completed = countComplete(results);
+}
+
+parentPort.postMessage({
+  data: results,
+  count: countListByType,
+});
 // if (action === "updateFields") updateFields();

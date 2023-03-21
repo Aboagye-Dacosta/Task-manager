@@ -45,6 +45,19 @@ const saveFederatedUser = (user, callback) => {
   });
 };
 
+function getUserByUserId(id) {
+  return new Promise((resolve, reject) => {
+    const sql = `SELECT * FROM users WHERE user_id = ?`;
+    db.get(sql, [id], (err, row) => {
+      if (err) {
+        console.log(err);
+        reject(err);
+      }
+      resolve(row);
+    });
+  });
+}
+
 function getUserByEmail(email) {
   return new Promise((resolve, reject) => {
     const sql = `SELECT * FROM users WHERE user_email = ?`;
@@ -58,7 +71,27 @@ function getUserByEmail(email) {
   });
 }
 
+function updateUser(user, fields, profileImage, updatedAt) {
+  console.log(user.id, fields, profileImage, updatedAt);
+  return new Promise((resolve, reject) => {
+    const sql = `Update users set user_name = ?, user_email = ?, user_profile_image = ? ,user_updated_at = ? where user_id = ?`;
+
+    db.run(
+      sql,
+      [fields.username, fields.email, profileImage, updatedAt, user.id],
+      (err) => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+      }
+    );
+  });
+}
+
 module.exports = {
   saveUser,
   getUserByEmail,
+  updateUser,
+  getUserByUserId,
 };

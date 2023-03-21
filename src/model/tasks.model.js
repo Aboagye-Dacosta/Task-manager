@@ -30,33 +30,59 @@ function saveTask(task, userId, next) {
 }
 
 //read tasks by user id and task name
-function readTask(userId, type) {
+function readTask(userId) {
   return new Promise((resolve, reject) => {
     db.serialize(() => {
-      if (type === "all" || !type) {
-        db.all(
-          "SELECT * FROM tasks INNER JOIN user_tasks ON tasks.task_id = user_tasks.task_id WHERE user_tasks.user_id = ?",
-          [userId],
-          (err, rows) => {
+      db.all(
+        "SELECT * FROM tasks INNER JOIN user_tasks ON tasks.task_id = user_tasks.task_id WHERE user_tasks.user_id = ?",
+        [userId],
+        (err, rows) => {
+          if (err) return reject(err);
+          resolve(rows);
+        }
+      );
+      // } else {
+      //   db.all(
+      //     "SELECT * FROM tasks INNER JOIN user_tasks ON tasks.task_id = user_tasks.task_id WHERE user_tasks.user_id = ? AND tasks.task_type = ?",
+      //     [userId, type],
+      //     (err, rows) => {
+      //       if (err) return reject(err);
+      //       resolve(rows);
+      //     }
+      //   );
+      // }
+    });
+  });
+}
+//update task by user id and type of update
+function updateTask(id, completed, important) {
+  console.log(id, completed, important);
+  return new Promise((resolve, reject) => {
+    db.serialize(() => {
+      if (completed >= 0) {
+        db.run(
+          "UPDATE tasks SET task_completed = ? WHERE task_id = ?",
+          [completed, id],
+          (err) => {
             if (err) return reject(err);
-            resolve(rows);
+            resolve();
           }
         );
-      } else {
-        db.all(
-          "SELECT * FROM tasks INNER JOIN user_tasks ON tasks.task_id = user_tasks.task_id WHERE user_tasks.user_id = ? AND tasks.task_type = ?",
-          [userId, type],
-          (err, rows) => {
+      }
+
+      if (important >= 0) {
+        db.run(
+          "UPDATE tasks SET task_important = ? WHERE task_id = ?",
+          [important, id],
+          (err) => {
             if (err) return reject(err);
-            resolve(rows);
+            resolve();
           }
         );
       }
     });
   });
 }
-//update task by user id and type of update
-function updateTask() {}
 
 //delete task
 function deleteTaskById() {}

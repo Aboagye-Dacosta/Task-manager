@@ -21,6 +21,30 @@ body {
   min-height: 100vh;
 }
 
+@media only screen and (max-width: 37.5em) {
+  html {
+    font-size: 40%;
+  }
+  body {
+    font-size: 1.4rem;
+  }
+}
+@media only screen and (min-width: 37.5em) and (max-width: 48em) {
+  html {
+    font-size: 45%;
+  }
+  body {
+    font-size: 1.6rem;
+  }
+}
+@media only screen and (min-width: 48em) and (max-width: 56.25em) {
+  html {
+    font-size: 50%;
+  }
+  body {
+    font-size: 1.6rem;
+  }
+}
 .utility-margin-top-sm {
   margin-top: 1rem;
 }
@@ -46,7 +70,11 @@ body {
 }
 
 .utility-width-50 {
-  width: 50%;
+  width: 50% !important;
+}
+
+.utility-width-min {
+  max-width: max-content;
 }
 
 .utility-height-100 {
@@ -159,23 +187,22 @@ body {
   width: 100%;
 }
 .side-bar__header {
-  flex: 1;
+  height: 15rem;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
-  width: 100%;
 }
 .side-bar__header__image {
-  width: 100px;
-  height: 100px;
+  width: 50%;
+  height: 55%;
   margin-bottom: 1rem;
 }
 .side-bar__header__image > img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   border-radius: 50%;
+  object-fit: cover;
 }
 .side-bar__header__title {
   font-size: 1.2rem;
@@ -183,27 +210,33 @@ body {
   text-transform: uppercase;
   margin-bottom: 0.1rem;
 }
+@media only screen and (max-width: 37.5em) {
+  .side-bar__header__title {
+    text-align: center;
+  }
+}
 .side-bar__header__subtitle {
   font-size: 1rem;
   font-weight: 400;
 }
 .side-bar__content {
-  flex: 2;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
   margin-left: -2rem;
+  margin-top: 2rem;
 }
 .side-bar__footer {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
   padding-right: 1rem;
   width: 100%;
+  height: 5rem;
 }
 
 .content {
@@ -219,6 +252,13 @@ body {
   bottom: 3rem;
   left: 50%;
   transform: translateX(-50%);
+}
+.content__title {
+  position: absolute;
+  top: 0.5rem;
+  left: 4rem;
+  color: #333;
+  z-index: 100;
 }
 
 .form {
@@ -310,6 +350,8 @@ body {
   margin: 0 10px;
   padding: 0.5rem 1.5rem;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 .list__item:hover {
   background-color: #fff;
@@ -332,6 +374,7 @@ body {
   border: 1px solid #333;
   padding: 0 0.5rem;
   border-radius: 0.5rem;
+  background-color: #fff;
 }
 .task__input__icon {
   font-size: 1.5rem;
@@ -398,6 +441,10 @@ body {
   visibility: visible;
   opacity: 1;
 }
+.task__item__check-completed__checkbox:hover ~ .task__item__icon-check {
+  visibility: visible;
+  opacity: 1;
+}
 .task__item__icon-star-rate {
   visibility: hidden;
   opacity: 0;
@@ -459,10 +506,13 @@ body {
   height: 95vh;
   background-color: #f7f7f7;
   box-shadow: 0 0.5rem 1rem rgba(51, 51, 51, 0.2);
+  width: 100%;
 }
 .home-my-day {
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .home-my-day__bg {
   position: absolute;
@@ -485,21 +535,57 @@ body {
 }
 .home-my-day__content {
   width: 100%;
-  padding: 5rem 0;
+  padding: 7rem 0;
+}
+.home-my-day__content__not-completed {
+  max-height: 30rem;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  transition: all 0.2s;
+}
+.home-my-day__content__not-completed:hover {
+  overflow-y: scroll;
 }
 
 .profile {
   padding: 5rem 0;
+  display: flex;
+}
+@media only screen and (max-width: 37.5em) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media only screen and (min-width: 37.5em) and (max-width: 48em) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 .profile__image {
   width: 100%;
-  height: 100%;
-  margin-right: 4rem;
+  height: 20rem;
   align-self: flex-start;
+  position: relative;
 }
 .profile__image > img {
-  width: 100%;
+  width: 90%;
+  height: 100%;
   border-radius: 50%;
+  object-fit: cover;
+}
+@media only screen and (max-width: 37.5em) {
+  .profile__image {
+    width: 100%;
+    height: 10rem;
+    margin-bottom: 1rem;
+  }
+}
+.profile__image__upload {
+  position: absolute;
+  top: 10%;
+  right: 40%;
 }
 .profile__tasks {
   background-color: #f4eeee;
@@ -508,8 +594,16 @@ body {
 }
 .profile__form {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+@media only screen and (max-width: 37.5em) {
+  .profile__form {
+    flex-direction: column;
+  }
 }
 .profile__form-fields {
   display: flex;
+  width: 100%;
 }

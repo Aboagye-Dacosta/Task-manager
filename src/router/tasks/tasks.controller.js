@@ -9,7 +9,9 @@ const {
   readTask,
 } = require("../../model/tasks.model");
 
-const validParams = ["basic", "planned", "important"];
+const { updateUser, getUserByEmail } = require("../../model/users.model");
+
+const validParams = ["basic", "planned", "important", "assigned-to-me"];
 
 //update updateFields
 function updateFields(tasks) {
@@ -21,6 +23,8 @@ function updateFields(tasks) {
       notDone: task.task_completed === 0 ? true : false,
       important: task.task_important === 1 ? true : false,
       notImportant: task.task_important === 0 ? true : false,
+      checked: task.task_completed === 1 ? "checked" : "",
+      checkedImportant: task.task_important === 1 ? "checked" : "",
     };
   });
 }
@@ -31,7 +35,7 @@ function httpSaveTask(req, res, next) {
 
   if (!type || type == "all") type = "basic";
 
-  if (!validParams.includes(type)) return res.redirect("/tasks");
+  if (!validParams.includes(type)) return res.redirect(`/tasks/${type}`);
 
   const { task_content } = req.body;
   const { id: user_id } = req.user;
@@ -46,7 +50,7 @@ function httpSaveTask(req, res, next) {
     taskId: id,
     taskType: type,
     taskContent: task_content,
-    important: 0,
+    important: type === "important" ? 1 : 0,
     completed: 0,
     createdAt,
     updatedAt,
@@ -58,11 +62,10 @@ function httpSaveTask(req, res, next) {
 
 //read tasks
 async function httpReadTasks(req, res, next) {
-  const { type } = req.params;
   const { id: user_id } = req.user;
 
   try {
-    const rows = await readTask(user_id, type);
+    const rows = await readTask(user_id);
     req.tasks = updateFields(rows);
     next();
   } catch (error) {
@@ -71,17 +74,29 @@ async function httpReadTasks(req, res, next) {
 }
 
 //updated
-function httpUpdateTaskImportant(req, res, next) {}
+async function httpUpdateTask(req, res, next) {
+  const { completed, important, id } = req.body;
 
-function httpUpdateTaskCompleted(req, res) {}
+  console.log(req.body);
+
+  if (!id) next();
+  try {
+    await updateTask(id, completed, important);
+  } catch (err) {
+    next(err);
+  }
+
+  next();
+}
 
 //delete
 function httpDeleteTaskById(req, res) {}
+
+//TODO update user profile - move it to auth
 
 module.exports = {
   httpSaveTask,
   httpReadTasks,
   httpDeleteTaskById,
-  httpUpdateTaskCompleted,
-  httpUpdateTaskImportant,
+  httpUpdateTask,
 };
