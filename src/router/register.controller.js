@@ -21,11 +21,10 @@ function setSessionBody(user) {
 
 //TODO save user to db
 async function httpSaveUser(req, res, next) {
-  console.log(req.body);
+  
 
   for (let [key, value] of Object.entries(req.body)) {
     if (!value) {
-      console.error(`${key} parameter is empty`);
       return res.redirect("/auth/register");
     }
   }
@@ -64,7 +63,6 @@ async function httpReadUser(email, password, callback) {
   const key = crypto.pbkdf2Sync(password, user.user_salt, 100000, 64, "sha512");
 
   if (!crypto.timingSafeEqual(user.user_hash_password, key)) {
-    console.log("password does not match");
     return callback("password incorrect");
   }
   callback(null, setSessionBody(user));

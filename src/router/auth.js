@@ -2,13 +2,13 @@ const express = require("express");
 const path = require("path");
 const passport = require("passport");
 const formidable = require("formidable");
+
 const {
   httpSaveUser,
   httpReadUser,
   httpUpdateUser,
 } = require("./register.controller");
 const LocalStrategy = require("passport-local");
-
 
 const authRouter = express.Router();
 
@@ -51,6 +51,7 @@ authRouter.post(
 
 authRouter.get("/login", (req, res) => {
   if (req.user) {
+    console.log(req.user)
     return res.redirect("/tasks");
   }
   return res.render("login", {
